@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohamed Elhefnawy</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    background: radial-gradient(circle at top, #0a0f2c, #020617);
+    color:white;
+    text-align:center;
+}
+
+/* HERO */
+.hero{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.hero img{
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    object-fit:cover;
+    border:5px solid #00eaff;
+    box-shadow:0 0 40px #00eaff;
+}
+
+.hero h1{
+    font-size:48px;
+    margin-top:20px;
+}
+
+.typing{
+    font-size:22px;
+    color:#00eaff;
+    margin:15px 0;
+}
+
+/* BUTTONS */
+.buttons{
+    display:flex;
+    gap:20px;
+}
+
+.btn{
+    padding:12px 25px;
+    border-radius:25px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.view{
+    border:2px solid #00eaff;
+    color:#00eaff;
+}
+
+.view:hover{
+    background:#00eaff;
+    color:black;
+}
+
+.download{
+    background:#00eaff;
+    color:black;
+    box-shadow:0 0 20px #00eaff;
+}
+
+.download:hover{
+    transform:scale(1.1);
+}
+
+/* SOCIAL */
+.social{
+    margin-top:20px;
+}
+
+.social a{
+    color:white;
+    margin:0 12px;
+    font-size:26px;
+    transition:0.3s;
+    text-decoration:none;
+    display:inline-block;
+}
+
+.social a:hover{
+    color:#00eaff;
+    transform:scale(1.2);
+}
+
+/* SECTIONS */
+section{
+    padding:80px 20px;
+}
+
+h2{
+    font-size:32px;
+    margin-bottom:30px;
+}
+
+/* SKILLS */
+.skill{
+    margin:20px auto;
+    width:300px;
+    text-align:left;
+}
+
+.skill span{
+    display:block;
+    margin-bottom:5px;
+}
+
+.bar{
+    height:8px;
+    background:#222;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.progress{
+    height:100%;
+    background:#00eaff;
+}
+
+/* CARDS */
+.cards{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.card{
+    background: rgba(255,255,255,0.05);
+    padding:25px;
+    border-radius:15px;
+    width:260px;
+    backdrop-filter: blur(10px);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform: translateY(-10px) scale(1.05);
+    box-shadow:0 0 25px #00eaff;
+}
+
+/* SCROLL */
+.hidden{
+    opacity:0;
+    transform:translateY(50px);
+    transition:1s;
+}
+
+.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+footer{
+    padding:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+    <img src="me.png">
+    <h1>Mohamed Alsaid Elhefnawy</h1>
+    <div class="typing">Electrical Engineering | Control & Automation</div>
+
+    <div class="buttons">
+        <a href="cv.pdf" target="_blank" class="btn view">View CV</a>
+        <a href="cv.pdf" download class="btn download">Download CV</a>
+    </div>
+</div>
+
+<section class="hidden">
+    <h2>About Me</h2>
+    <p>Passionate about automation, CNC systems, and smart solutions. Always building real projects.</p>
+</section>
+
+<section class="hidden">
+    <h2>Skills</h2>
+
+    <div class="skill">
+        <span>Automation</span>
+        <div class="bar"><div class="progress" style="width:90%"></div></div>
+    </div>
+
+    <div class="skill">
+        <span>CNC Machines</span>
+        <div class="bar"><div class="progress" style="width:85%"></div></div>
+    </div>
+
+    <div class="skill">
+        <span>Electrical Engineering</span>
+        <div class="bar"><div class="progress" style="width:80%"></div></div>
+    </div>
+
+</section>
+
+<section class="hidden">
+    <h2>Projects</h2>
+    <div class="cards">
+
+        <div class="card">
+            <h3>CNC Laser</h3>
+            <p>CNC 3018 machine project</p>
+        </div>
+
+        <div class="card">
+            <h3>Smart City</h3>
+            <p>Idea for New Mansoura</p>
+        </div>
+
+        <div class="card">
+            <h3>Automation</h3>
+            <p>Control systems & robotics</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="hidden">
+    <h2>Contact</h2>
+
+    <div class="social">
+        <!-- EMAIL -->
+        <a href="mailto:mohamed.elhefnawy0000@gmail.com">
+            <i class="fas fa-envelope"></i>
+        </a>
+
+        <!-- WHATSAPP -->
+        <a href="https://wa.me/201092729861" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+
+        <!-- FACEBOOK -->
+        <a href="https://www.facebook.com/share/17cbhpwAxd/" target="_blank">
+            <i class="fab fa-facebook"></i>
+        </a>
+
+        <!-- LINKEDIN -->
+        <a href="https://www.linkedin.com/in/mohamedalsaid" target="_blank">
+            <i class="fab fa-linkedin"></i>
+        </a>
+
+        <!-- GITHUB -->
+        <a href="https://github.com/" target="_blank">
+            <i class="fab fa-github"></i>
+        </a>
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 Mohamed Elhefnawy</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('show');
+        }
+    });
+});
+document.querySelectorAll('.hidden').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
