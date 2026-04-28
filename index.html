@@ -9,6 +9,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Orbitron:wght@700&family=Syne:wght@700;800&family=Rajdhani:wght@600;700&display=swap"
         rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
             --bg-dark: #05070a;
@@ -40,7 +44,7 @@
             color: var(--text-white);
             line-height: 1.6;
             overflow-x: hidden;
-            padding: 20px;
+            padding: 100px 20px 20px 20px;
         }
 
         /* --- Custom Scrollbar --- */
@@ -172,90 +176,6 @@
             background: linear-gradient(90deg, transparent, var(--primary-blue), transparent);
             box-shadow: 0 0 15px var(--primary-blue);
             z-index: 5;
-        }
-
-        /* --- Header / Nav Box --- */
-        header {
-            padding: 12px 60px;
-            max-width: 1100px;
-            margin-left: auto;
-            margin-right: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(13, 17, 23, 0.9);
-            background-image:
-                linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
-            background-size: 15px 15px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 1000;
-            position: sticky;
-            top: 10px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 22px;
-            color: var(--text-white);
-            letter-spacing: -1px;
-            transition: var(--transition);
-        }
-
-        .logo span {
-            color: var(--primary-blue);
-            margin-left: 4px;
-        }
-
-        .logo:hover {
-            transform: scale(1.02);
-            filter: brightness(1.1);
-        }
-
-        nav ul {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        nav ul li a {
-            color: var(--text-gray);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: var(--transition);
-            padding: 8px 16px;
-            border-radius: 20px;
-        }
-
-        nav ul li a:hover {
-            background: var(--primary-blue);
-            color: var(--text-white);
-        }
-
-        .btn-nav-hire {
-            background: var(--primary-blue);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 13px;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-nav-hire:hover {
-            background: var(--primary-blue-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
         }
 
         /* --- Hero Section Box --- */
@@ -886,10 +806,6 @@
 
         /* --- Responsive --- */
         @media (max-width: 1024px) {
-            header {
-                padding: 12px 30px;
-            }
-
             .hero {
                 padding: 40px;
                 gap: 40px;
@@ -901,64 +817,6 @@
         }
 
         @media (max-width: 992px) {
-            header {
-                padding: 10px 20px; /* Reduced padding */
-                justify-content: space-between;
-                border-radius: 20px; /* Smaller radius */
-                top: 5px;
-                overflow: visible !important;
-                max-width: 95%; /* Ensure it doesn't touch edges too much */
-            }
-
-            .logo {
-                font-size: 18px; /* Smaller logo font */
-            }
-
-            .menu-toggle {
-                display: block;
-                font-size: 20px; /* Smaller toggle */
-            }
-
-            nav {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 100%;
-                height: 100vh;
-                background: rgba(5, 7, 10, 0.98);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                z-index: 2000;
-            }
-
-            nav.active {
-                right: 0;
-            }
-
-            nav ul {
-                flex-direction: column;
-                gap: 40px;
-                text-align: center;
-                width: 100%;
-                margin: 0;
-            }
-
-            nav ul li a {
-                font-size: 20px;
-                padding: 10px 20px;
-            }
-
-            .btn-nav-hire {
-                display: flex;
-                padding: 8px 18px;
-                font-size: 11px;
-            }
-
             .hero {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -1009,7 +867,7 @@
 
         @media (max-width: 600px) {
             body {
-                padding: 10px;
+                padding: 80px 10px 20px 10px;
             }
 
             .box-container {
@@ -1090,26 +948,54 @@
         <div class="blob blob-3"></div>
     </div>
 
-    <header class="box-container">
-        <a href="#" class="logo">Mohamed <span>Elhefnawy</span></a>
-        <nav id="nav-menu">
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Works</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-        <div style="display: flex; align-items: center; gap: 15px;">
-            <a href="https://wa.me/201092729861" target="_blank" class="btn-nav-hire"><i class="fab fa-whatsapp"></i>
-                Hire
-                me!</a>
-            <button class="menu-toggle" id="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
+    <!-- Floating Pill Navbar -->
+    <nav class="fixed top-6 left-0 right-0 z-[1001] flex justify-center px-4">
+        <div
+            class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-full pl-4 md:pl-6 pr-2 py-2 flex items-center justify-between w-full max-w-6xl shadow-2xl shadow-blue-900/5">
+
+            <!-- Logo -->
+            <div class="flex items-center gap-2 cursor-pointer group" onclick="window.scrollTo(0,0)">
+                <a href="#" class="flex items-center text-white font-extrabold text-lg md:text-xl font-family tracking-tight">
+                    MOHAMED <span style="color: var(--primary-blue); margin-left: 4px;">ALSAID</span>
+                </a>
+            </div>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">About</a>
+                <a href="#education" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Education</a>
+                <a href="#skills" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Skills</a>
+                <a href="#projects" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Works</a>
+                <a href="#contact" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Contact</a>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-4">
+                <a href="https://wa.me/201092729861" target="_blank"
+                    class="hidden sm:block bg-gradient-to-r from-blue-500 to-blue-600 text-black text-xs font-bold px-6 py-2.5 rounded-full hover:shadow-[0_0_15px_rgba(59,130,246,0.4)] transition-all transform hover:scale-105">
+                    Hire me!
+                </a>
+
+                <!-- Mobile Menu Toggle -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white p-2">
+                    <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobile-menu"
+                class="hidden absolute top-full left-0 right-0 mt-4 bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-6 flex flex-col space-y-4 border border-white/10 shadow-2xl text-center">
+                <a href="#about" class="text-gray-300 hover:text-blue-500 block py-2">About</a>
+                <a href="#education" class="text-gray-300 hover:text-blue-500 block py-2">Education</a>
+                <a href="#skills" class="text-gray-300 hover:text-blue-500 block py-2">Skills</a>
+                <a href="#projects" class="text-gray-300 hover:text-blue-500 block py-2">Works</a>
+                <a href="#contact" class="text-gray-300 hover:text-blue-500 block py-2">Contact</a>
+                <a href="https://wa.me/201092729861" target="_blank"
+                    class="bg-blue-500 text-black font-bold px-6 py-3 rounded-full hover:bg-blue-400 inline-block mt-2">Hire
+                    me!</a>
+            </div>
         </div>
-    </header>
+    </nav>
 
     <div class="box-container">
         <section class="hero" id="hero">
@@ -1306,28 +1192,38 @@
 
         // Cursor Glow & Dim Mask removed
 
-        // Mobile Menu Toggle
-        const menuToggle = document.getElementById('menu-toggle');
-        const navMenu = document.getElementById('nav-menu');
-        const navLinks = document.querySelectorAll('nav ul li a');
+        // Mobile Menu Toggle Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const navLinks = document.querySelectorAll('#mobile-menu a');
+        let isMenuOpen = false;
 
-        if (menuToggle) {
-            menuToggle.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                menuToggle.querySelector('i').classList.toggle('fa-bars');
-                menuToggle.querySelector('i').classList.toggle('fa-xmark');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                isMenuOpen = !isMenuOpen;
+                if (isMenuOpen) {
+                    mobileMenu.classList.remove('hidden');
+                    menuIcon.setAttribute('data-lucide', 'x');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.setAttribute('data-lucide', 'menu');
+                }
+                lucide.createIcons();
             });
         }
 
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                if (menuToggle) {
-                    menuToggle.querySelector('i').classList.add('fa-bars');
-                    menuToggle.querySelector('i').classList.remove('fa-xmark');
-                }
+                mobileMenu.classList.add('hidden');
+                menuIcon.setAttribute('data-lucide', 'menu');
+                isMenuOpen = false;
+                lucide.createIcons();
             });
         });
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
     </script>
 </body>
 
