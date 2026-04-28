@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed Alsaid | Electrical Engineer</title>
+    <title>Mohamed Elhefnawy | Electrical Engineer</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Orbitron:wght@700&family=Syne:wght@700;800&family=Rajdhani:wght@600;700&display=swap"
@@ -199,6 +199,15 @@
             padding: 5px;
         }
 
+        .nav-link {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
         /* --- Dimming Effect Mask --- */
         /* Removed dim-mask styles */
 
@@ -239,8 +248,14 @@
             font-weight: 800;
             line-height: 1;
             margin-bottom: 30px;
-            text-transform: uppercase;
             letter-spacing: -2px;
+            --glow-intensity: 0;
+            text-shadow: 0 0 calc(var(--glow-intensity) * 20px) rgba(59, 130, 246, var(--glow-intensity));
+            transition: text-shadow 0.2s ease-out;
+        }
+
+        .hero-content h1.highlighted {
+            text-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
         }
 
         .hero-content h1 span.accent {
@@ -431,13 +446,31 @@
         /* --- Reveal Animations --- */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(30px);
+            transition: 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+            will-change: transform, opacity;
         }
+
+        .reveal-left { transform: translateX(-50px); }
+        .reveal-right { transform: translateX(50px); }
+        .reveal-zoom { transform: scale(0.9); }
 
         .reveal.active {
             opacity: 1;
-            transform: translateY(0);
+            transform: translate(0) scale(1);
+        }
+
+        /* --- Scroll Progress Bar --- */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), #60a5fa);
+            box-shadow: 0 0 15px var(--primary-blue);
+            z-index: 2000;
+            transition: width 0.1s ease-out;
         }
 
         /* --- Sections Stylings --- */
@@ -446,17 +479,29 @@
         }
 
         h2 {
-            font-size: 40px;
+            font-family: 'Syne', sans-serif;
+            font-size: 80px;
             font-weight: 800;
             margin-bottom: 40px;
             text-transform: uppercase;
-            letter-spacing: -1px;
+            letter-spacing: 2px;
             color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h2::after {
+            content: '';
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-blue), transparent);
+            flex-grow: 1;
+            opacity: 0.3;
         }
 
         /* --- About Section --- */
         .about-text {
-            font-size: 20px;
+            font-size: 24px;
             color: var(--text-gray);
             max-width: 850px;
             line-height: 1.8;
@@ -486,7 +531,7 @@
         }
 
         .card h3 {
-            font-size: 22px;
+            font-size: 28px;
             margin-bottom: 15px;
             color: var(--text-white);
         }
@@ -495,7 +540,7 @@
             display: inline-block;
             color: var(--primary-blue);
             font-weight: 700;
-            font-size: 13px;
+            font-size: 18px;
             margin-bottom: 18px;
         }
 
@@ -506,8 +551,8 @@
         }
 
         .logo-circle {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--glass-border);
@@ -581,7 +626,7 @@
         }
 
         .skill-category-title {
-            font-size: 18px;
+            font-size: 26px;
             font-weight: 700;
             color: var(--text-gray);
             margin-bottom: 20px;
@@ -628,7 +673,7 @@
             justify-content: space-between;
             margin-bottom: 8px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 20px;
         }
 
         .skill-info span:first-child {
@@ -640,8 +685,8 @@
         .skill-info img {
             margin-right: 12px;
             color: var(--primary-blue);
-            width: 32px;
-            height: 32px;
+            width: 44px;
+            height: 44px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -649,7 +694,7 @@
         }
 
         .bar-container {
-            height: 6px;
+            height: 10px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
             overflow: hidden;
@@ -709,7 +754,7 @@
         }
 
         .work-box i {
-            font-size: 32px;
+            font-size: 44px;
             color: var(--primary-blue);
             margin-bottom: 15px;
             transition: var(--transition);
@@ -721,13 +766,13 @@
         }
 
         .work-box h3 {
-            font-size: 20px;
+            font-size: 26px;
             margin-bottom: 8px;
             color: white;
         }
 
         .work-box p {
-            font-size: 14px;
+            font-size: 18px;
             color: var(--text-gray);
         }
 
@@ -753,10 +798,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 12px;
-            font-size: 24px;
+            font-size: 32px;
             color: var(--text-gray);
             transition: var(--transition);
             background: rgba(255, 255, 255, 0.03);
@@ -775,8 +820,8 @@
         .clickable-light {
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 700;
-            font-size: clamp(14px, 2.5vw, 22px);
-            white-space: nowrap;
+            font-size: clamp(18px, 3vw, 28px);
+            white-space: normal;
             cursor: default;
             transition: var(--transition);
             user-select: none;
@@ -860,7 +905,7 @@
             }
 
             h2 {
-                font-size: 32px;
+                font-size: 50px;
                 text-align: center;
             }
         }
@@ -913,7 +958,11 @@
             }
 
             .about-text {
-                font-size: 15px;
+                font-size: 20px;
+            }
+
+            h2 {
+                font-size: 40px;
             }
 
             .social-row {
@@ -942,6 +991,8 @@
 </head>
 
 <body>
+    <div class="scroll-progress" id="scroll-bar"></div>
+
     <div class="bg-blobs">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
@@ -956,17 +1007,17 @@
             <!-- Logo -->
             <div class="flex items-center gap-2 cursor-pointer group" onclick="window.scrollTo(0,0)">
                 <a href="#" class="flex items-center text-white font-extrabold text-lg md:text-xl font-family tracking-tight">
-                    MOHAMED <span style="color: var(--primary-blue); margin-left: 4px;">ALSAID</span>
+                    MOHAMED <span style="color: var(--primary-blue); margin-left: 4px;">ELHEFNAWY</span>
                 </a>
             </div>
 
             <!-- Desktop Links -->
             <div class="hidden md:flex items-center gap-8">
-                <a href="#about" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">About</a>
-                <a href="#education" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Education</a>
-                <a href="#skills" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Skills</a>
-                <a href="#projects" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Works</a>
-                <a href="#contact" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Contact</a>
+                <a href="#about" class="nav-link text-gray-400 hover:text-white">About</a>
+                <a href="#education" class="nav-link text-gray-400 hover:text-white">Education</a>
+                <a href="#skills" class="nav-link text-gray-400 hover:text-white">Skills</a>
+                <a href="#projects" class="nav-link text-gray-400 hover:text-white">Works</a>
+                <a href="#contact" class="nav-link text-gray-400 hover:text-white">Contact</a>
             </div>
 
             <!-- Actions -->
@@ -985,11 +1036,11 @@
             <!-- Mobile Menu Dropdown -->
             <div id="mobile-menu"
                 class="hidden absolute top-full left-0 right-0 mt-4 bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-6 flex flex-col space-y-4 border border-white/10 shadow-2xl text-center">
-                <a href="#about" class="text-gray-300 hover:text-blue-500 block py-2">About</a>
-                <a href="#education" class="text-gray-300 hover:text-blue-500 block py-2">Education</a>
-                <a href="#skills" class="text-gray-300 hover:text-blue-500 block py-2">Skills</a>
-                <a href="#projects" class="text-gray-300 hover:text-blue-500 block py-2">Works</a>
-                <a href="#contact" class="text-gray-300 hover:text-blue-500 block py-2">Contact</a>
+                <a href="#about" class="nav-link text-gray-300 hover:text-blue-500 block py-2">About</a>
+                <a href="#education" class="nav-link text-gray-300 hover:text-blue-500 block py-2">Education</a>
+                <a href="#skills" class="nav-link text-gray-300 hover:text-blue-500 block py-2">Skills</a>
+                <a href="#projects" class="nav-link text-gray-300 hover:text-blue-500 block py-2">Works</a>
+                <a href="#contact" class="nav-link text-gray-300 hover:text-blue-500 block py-2">Contact</a>
                 <a href="https://wa.me/201092729861" target="_blank"
                     class="bg-blue-500 text-black font-bold px-6 py-3 rounded-full hover:bg-blue-400 inline-block mt-2">Hire
                     me!</a>
@@ -1001,7 +1052,7 @@
         <section class="hero" id="hero">
             <div class="hero-content">
                 <div class="status-badge">Available for hire</div>
-                <h1>I'M <span class="accent">MOHAMED <span class="outline">ALSAID</span></span></h1>
+                <h1 id="hero-name">I'm <span class="accent">Mohamed <span class="outline">Alsaid</span></span></h1>
                 <p>
                     Electrical Engineering Student specializing in <strong>Control and Automation</strong>.
                     Passionate about smart systems and CNC, building real-world solutions through technology.
@@ -1015,14 +1066,14 @@
 
             <div class="hero-visual">
                 <div class="image-card">
-                    <img src="me.png" alt="Mohamed Alsaid">
+                    <img src="me.png" alt="Mohamed Elhefnawy">
                 </div>
             </div>
         </section>
     </div>
 
     <div class="box-container">
-        <section id="about" class="reveal">
+        <section id="about" class="reveal reveal-left">
             <h2>About</h2>
             <div class="about-grid">
                 <p class="about-text">
@@ -1042,7 +1093,7 @@
     </div>
 
     <div class="box-container">
-        <section id="education" class="reveal">
+        <section id="education" class="reveal reveal-right">
             <h2>Education</h2>
             <div class="grid-cards">
                 <div class="card">
@@ -1065,7 +1116,7 @@
     </div>
 
     <div class="box-container">
-        <section id="skills" class="reveal">
+        <section id="skills" class="reveal reveal-zoom">
             <h2>Skills</h2>
             <div class="skills-container">
                 <!-- Auto Desk Category -->
@@ -1116,7 +1167,7 @@
     </div>
 
     <div class="box-container">
-        <section id="projects" class="reveal">
+        <section id="projects" class="reveal reveal-left">
             <h2>Works</h2>
             <div class="works-grid">
                 <div class="work-box" style="background-image: url('cnc.jpeg')">
@@ -1134,10 +1185,10 @@
     </div>
 
     <div class="box-container">
-        <section id="contact" class="reveal">
+        <section id="contact" class="reveal reveal-zoom">
             <h2>Contact</h2>
             <div class="contact-content">
-                <p class="about-text clickable-light" id="light-text"><strong>Committed to precision and ready to
+                <p class="about-text clickable-light" id="light-text"><strong>Committed to precision <br> and ready to
                         contribute to innovative projects</strong></p>
                 <div class="social-row">
                     <a href="mailto:mohamedelhefnawy0000@gmail.com" class="social-link"><i
@@ -1154,7 +1205,7 @@
             </div>
         </section>
         <footer>
-            <p>© 2026 Mohamed Alsaid</p>
+            <p>© 2026 Mohamed Elhefnawy</p>
         </footer>
     </div>
 
@@ -1179,8 +1230,45 @@
             }
         }
 
-        window.addEventListener("scroll", reveal);
-        window.addEventListener("load", reveal);
+        function updateScroll() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            const scrollBar = document.getElementById("scroll-bar");
+            if (scrollBar) scrollBar.style.width = scrolled + "%";
+        }
+
+        window.addEventListener("scroll", () => {
+            reveal();
+            updateScroll();
+        });
+        window.addEventListener("load", () => {
+            reveal();
+            updateScroll();
+        });
+
+        // Proximity Highlight Effect
+        const heroName = document.getElementById('hero-name');
+        if (heroName) {
+            window.addEventListener('mousemove', (e) => {
+                const rect = heroName.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const distance = Math.sqrt(Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2));
+                
+                const maxDistance = 450;
+                let intensity = 1 - (distance / maxDistance);
+                intensity = Math.max(0, Math.min(1, intensity));
+                
+                heroName.style.setProperty('--glow-intensity', intensity);
+                
+                if (distance < 150) {
+                    heroName.classList.add('highlighted');
+                } else {
+                    heroName.classList.remove('highlighted');
+                }
+            });
+        }
 
         // Clickable Light Text
         const lightText = document.getElementById('light-text');
