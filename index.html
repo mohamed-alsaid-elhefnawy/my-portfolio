@@ -61,18 +61,7 @@
             background: var(--primary-blue);
         }
 
-        #cursor-glow {
-            position: fixed;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s;
-            will-change: transform;
-        }
+        /* Removed cursor-glow styles */
 
         /* --- Background Animation --- */
         .bg-blobs {
@@ -167,9 +156,22 @@
             -webkit-backdrop-filter: blur(20px);
             border-radius: var(--card-radius);
             border: 1px solid var(--glass-border);
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.1);
             overflow: hidden;
             position: relative;
+        }
+
+        .box-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-blue), transparent);
+            box-shadow: 0 0 15px var(--primary-blue);
+            z-index: 5;
         }
 
         /* --- Header / Nav Box --- */
@@ -182,6 +184,10 @@
             justify-content: space-between;
             align-items: center;
             background: rgba(13, 17, 23, 0.9);
+            background-image:
+                linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+            background-size: 15px 15px;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             z-index: 1000;
@@ -193,17 +199,22 @@
             display: flex;
             align-items: center;
             text-decoration: none;
-        }
-
-        .logo img {
-            height: 24px;
-            width: auto;
-            display: block;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 22px;
+            color: var(--text-white);
+            letter-spacing: -1px;
             transition: var(--transition);
         }
 
-        .logo:hover img {
-            transform: scale(1.05);
+        .logo span {
+            color: var(--primary-blue);
+            margin-left: 4px;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
         }
 
         nav ul {
@@ -264,24 +275,12 @@
             color: var(--text-white);
             font-size: 24px;
             cursor: pointer;
-            z-index: 1001;
+            z-index: 2001;
             padding: 5px;
         }
 
         /* --- Dimming Effect Mask --- */
-        #dim-mask {
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(circle 400px at var(--mouse-x) var(--mouse-y), transparent 0%, rgba(5, 7, 10, 0.4) 100%);
-            pointer-events: none;
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
-
-        body:hover #dim-mask {
-            opacity: 1;
-        }
+        /* Removed dim-mask styles */
 
         .hero-content {
             z-index: 10;
@@ -327,6 +326,19 @@
         .hero-content h1 span.accent {
             color: var(--primary-blue);
             display: block;
+        }
+
+        .outline {
+            -webkit-text-stroke: 1px var(--primary-blue);
+            color: transparent;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+
+        .outline:hover {
+            -webkit-text-stroke: 1px var(--text-white);
+            filter: drop-shadow(0 0 10px var(--primary-blue));
         }
 
         .hero-content p {
@@ -457,7 +469,7 @@
             transform: translate(-50%, -50%);
             z-index: -1;
             filter: blur(40px);
-            animation: bgGlow 8s ease-in-out infinite;
+            opacity: 0.3;
         }
 
         .image-card {
@@ -465,39 +477,12 @@
             max-width: 500px;
             aspect-ratio: 0.85;
             position: relative;
-            overflow: visible;
-            /* Changed to visible so image isn't clipped harshly */
+            overflow: hidden;
+            border-radius: 40px;
             animation: float 6s ease-in-out infinite;
             z-index: 2;
-            mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-        }
-
-        /* --- Hero Ellipse --- */
-        .hero-ellipse {
-            position: absolute;
-            width: 600px;
-            height: 450px;
-            border: 1px solid rgba(59, 130, 246, 0.15);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            animation: rotate-ellipse 30s linear infinite;
-            pointer-events: none;
-        }
-
-        .hero-ellipse::after {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: 50%;
-            width: 10px;
-            height: 10px;
-            background: var(--primary-blue);
-            border-radius: 50%;
-            box-shadow: 0 0 15px var(--primary-blue);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         @keyframes rotate-ellipse {
@@ -515,7 +500,6 @@
             height: 100%;
             object-fit: cover;
             object-position: top;
-            filter: grayscale(0.2);
             transition: var(--transition);
         }
 
@@ -627,15 +611,96 @@
             object-fit: cover;
         }
 
-        /* --- Skills --- */
-        .skills-grid {
+        /* --- About Grid --- */
+        .about-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .training-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .training-card:hover {
+            border-color: var(--primary-blue);
+            background: rgba(59, 130, 246, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .training-card i {
+            font-size: 40px;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        .training-card h3 {
+            font-size: 24px;
+            color: var(--text-white);
+            margin-bottom: 5px;
+        }
+
+        .training-card p {
+            color: var(--text-gray);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- Skills --- */
+        .skills-container {
+            display: flex;
+            flex-direction: column;
             gap: 40px;
         }
 
+        .skill-category-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-category-title::after {
+            content: '';
+            height: 1px;
+            flex-grow: 1;
+            background: var(--glass-border);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
         .skill-bar {
-            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .skill-bar:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--primary-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
 
         .skill-info {
@@ -752,27 +817,64 @@
 
         /* --- Contact --- */
         .contact-content {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto;
+            text-align: left;
+            max-width: 100%;
+            margin: 0;
         }
 
         .social-row {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             gap: 40px;
             margin-top: 40px;
         }
 
         .social-link {
-            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            font-size: 24px;
             color: var(--text-gray);
             transition: var(--transition);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid transparent;
+            text-decoration: none;
         }
 
         .social-link:hover {
-            color: var(--primary-blue);
+            background: var(--primary-blue);
+            color: white !important;
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+            border-color: var(--primary-blue);
+        }
+
+        .clickable-light {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: clamp(14px, 2.5vw, 22px);
+            white-space: nowrap;
+            cursor: default;
+            transition: var(--transition);
+            user-select: none;
+            display: inline-block;
+            color: var(--text-white);
+        }
+
+        .clickable-light:hover {
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .clickable-light.active-glow {
+            color: var(--primary-blue);
+        }
+
+        .clickable-light:active {
+            transform: scale(0.98);
         }
 
         footer {
@@ -804,6 +906,7 @@
                 justify-content: space-between;
                 border-radius: 30px;
                 top: 5px;
+                overflow: visible !important;
             }
 
             .menu-toggle {
@@ -814,17 +917,17 @@
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 70%;
+                width: 100%;
                 height: 100vh;
-                background: rgba(13, 17, 23, 0.95);
+                background: rgba(5, 7, 10, 0.98);
                 backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                z-index: 1000;
-                border-left: 1px solid var(--glass-border);
+                z-index: 2000;
             }
 
             nav.active {
@@ -898,7 +1001,19 @@
             }
 
             .hero-content h1 {
-                font-size: 36px;
+                font-size: 28px;
+                letter-spacing: -1px;
+            }
+
+            .hero-content p {
+                font-size: 14px;
+                margin-bottom: 25px;
+            }
+
+            .status-badge {
+                padding: 6px 12px;
+                font-size: 10px;
+                margin-bottom: 20px;
             }
 
             .hero-btns {
@@ -930,7 +1045,25 @@
             }
 
             .about-text {
+                font-size: 15px;
+            }
+
+            .detail-item {
+                padding: 15px;
+                gap: 12px;
+                border-radius: 15px;
+            }
+
+            .detail-item i {
                 font-size: 16px;
+            }
+
+            .detail-item div h4 {
+                font-size: 14px;
+            }
+
+            .detail-item div p {
+                font-size: 12px;
             }
 
             .social-row {
@@ -940,6 +1073,12 @@
 
             .hero-visual {
                 margin-bottom: 20px;
+            }
+
+            .reveal {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+                transition: none !important;
             }
         }
 
@@ -957,11 +1096,9 @@
         <div class="blob blob-2"></div>
         <div class="blob blob-3"></div>
     </div>
-    <div id="cursor-glow"></div>
-    <div id="dim-mask"></div>
 
     <header class="box-container">
-        <a href="#" class="logo"><img src="nav_logo.png" alt="Mohamed Elhefnawy Logo"></a>
+        <a href="#" class="logo">Mohamed <span>Elhefnawy</span></a>
         <nav id="nav-menu">
             <ul>
                 <li><a href="#about">About</a></li>
@@ -985,7 +1122,7 @@
         <section class="hero" id="hero">
             <div class="hero-content">
                 <div class="status-badge">Available for hire</div>
-                <h1>I'M <span class="accent">MOHAMED ALSAID</span></h1>
+                <h1>I'M <span class="accent">MOHAMED <span class="outline">ALSAID</span></span></h1>
                 <p>
                     Electrical Engineering Student specializing in <strong>Control and Automation</strong>.
                     Passionate about smart systems and CNC, building real-world solutions through technology.
@@ -998,7 +1135,6 @@
             </div>
 
             <div class="hero-visual">
-                <div class="hero-ellipse"></div>
                 <div class="image-card">
                     <img src="me.png" alt="Mohamed Alsaid">
                 </div>
@@ -1009,12 +1145,19 @@
     <div class="box-container">
         <section id="about" class="reveal">
             <h2>About</h2>
-            <p class="about-text">
-                I am a student at the Faculty of Engineering, New Mansoura University, aspiring to specialize in
-                Electrical Engineering, specifically in Control and Automation. I am dedicated to building smart systems
-                that bridge hardware and programming, with a strong emphasis on practical applications like CNC and
-                embedded systems.
-            </p>
+            <div class="about-grid">
+                <p class="about-text">
+                    I am a student at the Faculty of Engineering, New Mansoura University, aspiring to specialize in
+                    Electrical Engineering, specifically in Control and Automation. I am dedicated to building smart systems
+                    that bridge hardware and programming, with a strong emphasis on practical applications like CNC and
+                    embedded systems.
+                </p>
+                <div class="training-card">
+                    <i class="fas fa-clock-rotate-left"></i>
+                    <h3>+5 Hours</h3>
+                    <p>Training</p>
+                </div>
+            </div>
         </section>
     </div>
 
@@ -1044,14 +1187,48 @@
     <div class="box-container">
         <section id="skills" class="reveal">
             <h2>Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-bar">
-                    <div class="skill-info">
-                        <span><img src="autocad-icon.png" alt="AutoCAD"> AutoCAD</span>
-                        <span>85%</span>
+            <div class="skills-container">
+                <!-- Auto Desk Category -->
+                <div class="skill-category reveal">
+                    <h3 class="skill-category-title">Autodesk</h3>
+                    <div class="skills-grid">
+                        <div class="skill-bar reveal" style="transition-delay: 0.1s;">
+                            <div class="skill-info">
+                                <span><img src="autocad-icon.png" alt="AutoCAD"> AutoCAD</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-fill" data-percent="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar reveal" style="transition-delay: 0.2s;">
+                            <div class="skill-info">
+                                <span><img
+                                        src="https://alphanetrix.com/wp-content/uploads/2025/09/Autodesk-13-revit.png"
+                                        alt="Revit"> Revit (BIM)</span>
+                                <span>30%</span>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-fill" data-percent="30%"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bar-container">
-                        <div class="bar-fill" data-percent="85%"></div>
+                </div>
+
+                <!-- Mechanical Category -->
+                <div class="skill-category reveal">
+                    <h3 class="skill-category-title">Mechanical Design</h3>
+                    <div class="skills-grid">
+                        <div class="skill-bar reveal" style="transition-delay: 0.3s;">
+                            <div class="skill-info">
+                                <span><img src="https://img.icons8.com/color/48/000000/solidworks.png" alt="SolidWorks">
+                                    SolidWorks</span>
+                                <span>30%</span>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-fill" data-percent="30%"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1080,7 +1257,8 @@
         <section id="contact" class="reveal">
             <h2>Contact</h2>
             <div class="contact-content">
-                <p class="about-text">I'm always open to discussing new projects or creative ideas.</p>
+                <p class="about-text clickable-light" id="light-text"><strong>Committed to precision and ready to
+                        contribute to innovative projects</strong></p>
                 <div class="social-row">
                     <a href="mailto:mohamed.elhefnawy0000@gmail.com" class="social-link"><i
                             class="fas fa-envelope"></i></a>
@@ -1124,15 +1302,15 @@
         window.addEventListener("scroll", reveal);
         window.addEventListener("load", reveal);
 
-        // Cursor Glow & Dim Mask
-        const glow = document.getElementById('cursor-glow');
-        const root = document.documentElement;
-        window.addEventListener('mousemove', (e) => {
-            glow.style.left = e.clientX + 'px';
-            glow.style.top = e.clientY + 'px';
-            root.style.setProperty('--mouse-x', e.clientX + 'px');
-            root.style.setProperty('--mouse-y', e.clientY + 'px');
-        });
+        // Clickable Light Text
+        const lightText = document.getElementById('light-text');
+        if (lightText) {
+            lightText.addEventListener('click', () => {
+                lightText.classList.toggle('active-glow');
+            });
+        }
+
+        // Cursor Glow & Dim Mask removed
 
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menu-toggle');
