@@ -257,6 +257,32 @@
             min-height: 70vh;
         }
 
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-white);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        /* --- Dimming Effect Mask --- */
+        #dim-mask {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle 400px at var(--mouse-x) var(--mouse-y), transparent 0%, rgba(5, 7, 10, 0.4) 100%);
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        body:hover #dim-mask {
+            opacity: 1;
+        }
+
         .hero-content {
             z-index: 10;
             animation: float 7s ease-in-out infinite;
@@ -290,7 +316,7 @@
         }
 
         .hero-content h1 {
-            font-size: 80px;
+            font-size: clamp(40px, 8vw, 80px);
             font-weight: 800;
             line-height: 1;
             margin-bottom: 30px;
@@ -757,15 +783,78 @@
         }
 
         /* --- Responsive --- */
-        @media (max-width: 992px) {
+        @media (max-width: 1024px) {
+            header {
+                padding: 12px 30px;
+            }
+
             .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
                 padding: 40px;
+                gap: 40px;
             }
 
             .hero-content h1 {
-                font-size: 60px;
+                font-size: clamp(36px, 7vw, 60px);
+            }
+        }
+
+        @media (max-width: 992px) {
+            header {
+                padding: 15px 25px;
+                justify-content: space-between;
+                border-radius: 30px;
+                top: 5px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: rgba(13, 17, 23, 0.95);
+                backdrop-filter: blur(20px);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 1000;
+                border-left: 1px solid var(--glass-border);
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+                width: 100%;
+                margin: 0;
+            }
+
+            nav ul li a {
+                font-size: 20px;
+                padding: 10px 20px;
+            }
+
+            .btn-nav-hire {
+                display: flex;
+                padding: 8px 18px;
+                font-size: 11px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 60px 30px;
+                min-height: auto;
             }
 
             .hero-btns {
@@ -776,16 +865,26 @@
                 margin: 0 auto 30px;
             }
 
-            header {
-                padding: 20px;
+            .hero-visual {
+                order: -1;
             }
 
-            nav {
-                display: none;
+            .image-card {
+                max-width: 350px;
+                margin: 0 auto;
+            }
+
+            .hero-ellipse {
+                width: 450px;
+                height: 350px;
             }
 
             section {
-                padding: 40px 20px;
+                padding: 60px 30px;
+            }
+
+            h2 {
+                font-size: 32px;
             }
         }
 
@@ -794,12 +893,59 @@
                 padding: 10px;
             }
 
-            .hero-content h1 {
-                font-size: 40px;
+            .box-container {
+                border-radius: 24px;
             }
 
-            .box-container {
-                border-radius: 20px;
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .btn-nav-hire {
+                display: flex;
+                padding: 8px 20px;
+                font-size: 12px;
+            }
+
+            .grid-cards,
+            .skills-grid,
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-circle {
+                width: 60px;
+                height: 60px;
+            }
+
+            .about-text {
+                font-size: 16px;
+            }
+
+            .social-row {
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+
+            .hero-visual {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (pointer: coarse) {
+            #cursor-glow {
+                display: none;
             }
         }
     </style>
@@ -812,10 +958,11 @@
         <div class="blob blob-3"></div>
     </div>
     <div id="cursor-glow"></div>
+    <div id="dim-mask"></div>
 
     <header class="box-container">
         <a href="#" class="logo"><img src="nav_logo.png" alt="Mohamed Elhefnawy Logo"></a>
-        <nav>
+        <nav id="nav-menu">
             <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#education">Education</a></li>
@@ -824,8 +971,14 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
-        <a href="https://wa.me/201092729861" target="_blank" class="btn-nav-hire"><i class="fab fa-whatsapp"></i> Hire
-            me!</a>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <a href="https://wa.me/201092729861" target="_blank" class="btn-nav-hire"><i class="fab fa-whatsapp"></i>
+                Hire
+                me!</a>
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
     </header>
 
     <div class="box-container">
@@ -971,11 +1124,37 @@
         window.addEventListener("scroll", reveal);
         window.addEventListener("load", reveal);
 
-        // Cursor Glow
+        // Cursor Glow & Dim Mask
         const glow = document.getElementById('cursor-glow');
+        const root = document.documentElement;
         window.addEventListener('mousemove', (e) => {
             glow.style.left = e.clientX + 'px';
             glow.style.top = e.clientY + 'px';
+            root.style.setProperty('--mouse-x', e.clientX + 'px');
+            root.style.setProperty('--mouse-y', e.clientY + 'px');
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('nav ul li a');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                menuToggle.querySelector('i').classList.toggle('fa-bars');
+                menuToggle.querySelector('i').classList.toggle('fa-xmark');
+            });
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                if (menuToggle) {
+                    menuToggle.querySelector('i').classList.add('fa-bars');
+                    menuToggle.querySelector('i').classList.remove('fa-xmark');
+                }
+            });
         });
     </script>
 </body>
