@@ -902,15 +902,21 @@
 
         @media (max-width: 992px) {
             header {
-                padding: 15px 25px;
+                padding: 10px 20px; /* Reduced padding */
                 justify-content: space-between;
-                border-radius: 30px;
+                border-radius: 20px; /* Smaller radius */
                 top: 5px;
                 overflow: visible !important;
+                max-width: 95%; /* Ensure it doesn't touch edges too much */
+            }
+
+            .logo {
+                font-size: 18px; /* Smaller logo font */
             }
 
             .menu-toggle {
                 display: block;
+                font-size: 20px; /* Smaller toggle */
             }
 
             nav {
@@ -977,9 +983,18 @@
                 margin: 0 auto;
             }
 
-            .hero-ellipse {
-                width: 450px;
-                height: 350px;
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .about-text {
+                text-align: center;
+            }
+
+            .training-card {
+                max-width: 300px;
+                margin: 0 auto;
             }
 
             section {
@@ -988,6 +1003,7 @@
 
             h2 {
                 font-size: 32px;
+                text-align: center;
             }
         }
 
@@ -1027,12 +1043,6 @@
                 justify-content: center;
             }
 
-            .btn-nav-hire {
-                display: flex;
-                padding: 8px 20px;
-                font-size: 12px;
-            }
-
             .grid-cards,
             .skills-grid,
             .works-grid {
@@ -1048,26 +1058,9 @@
                 font-size: 15px;
             }
 
-            .detail-item {
-                padding: 15px;
-                gap: 12px;
-                border-radius: 15px;
-            }
-
-            .detail-item i {
-                font-size: 16px;
-            }
-
-            .detail-item div h4 {
-                font-size: 14px;
-            }
-
-            .detail-item div p {
-                font-size: 12px;
-            }
-
             .social-row {
-                gap: 20px;
+                gap: 15px;
+                justify-content: center;
                 flex-wrap: wrap;
             }
 
@@ -1148,7 +1141,8 @@
             <div class="about-grid">
                 <p class="about-text">
                     I am a student at the Faculty of Engineering, New Mansoura University, aspiring to specialize in
-                    Electrical Engineering, specifically in Control and Automation. I am dedicated to building smart systems
+                    Electrical Engineering, specifically in Control and Automation. I am dedicated to building smart
+                    systems
                     that bridge hardware and programming, with a strong emphasis on practical applications like CNC and
                     embedded systems.
                 </p>
@@ -1260,7 +1254,7 @@
                 <p class="about-text clickable-light" id="light-text"><strong>Committed to precision and ready to
                         contribute to innovative projects</strong></p>
                 <div class="social-row">
-                    <a href="mailto:mohamed.elhefnawy0000@gmail.com" class="social-link"><i
+                    <a href="mailto:mohamedelhefnawy0000@gmail.com" class="social-link"><i
                             class="fas fa-envelope"></i></a>
                     <a href="https://wa.me/201092729861" target="_blank" class="social-link"><i
                             class="fab fa-whatsapp"></i></a>
@@ -1274,7 +1268,7 @@
             </div>
         </section>
         <footer>
-            <p>© 2026 Mohamed Alsaid | Designed with Passion</p>
+            <p>© 2026 Mohamed Alsaid</p>
         </footer>
     </div>
 
