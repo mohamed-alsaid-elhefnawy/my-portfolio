@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNC Laser | Mohamed Elhefnawy</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --primary-theme: #0070ff;
+            --bg-dark: #030712;
+            --glass-bg: rgba(13, 17, 23, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-white: #ffffff;
+            --text-gray: #94a3b8;
+            --transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-theme) transparent;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-white);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Background Blobs */
+        .bg-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            filter: blur(80px);
+            opacity: 0.4;
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+        }
+
+        .blob-1 {
+            background: var(--primary-theme);
+            top: -100px;
+            right: -100px;
+            animation: move 20s infinite alternate;
+        }
+
+        .blob-2 {
+            background: #4f46e5;
+            bottom: -100px;
+            left: -100px;
+            animation: move 25s infinite alternate-reverse;
+        }
+
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(100px, 100px) scale(1.2); }
+        }
+
+        /* Hero / Cover Section */
+        .project-hero {
+            height: 80vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .project-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, var(--bg-dark), transparent);
+            z-index: 5;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4);
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(40px, 8vw, 80px);
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+            background: linear-gradient(to bottom, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 24px;
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            background: var(--primary-theme);
+            transform: translateX(-5px);
+        }
+
+        /* Glass Cards */
+        .section-inner {
+            max-width: 1152px;
+            margin: -100px auto 100px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 20;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(40px) saturate(200%);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 60px;
+            margin-bottom: 40px;
+            box-shadow: 0 40px 100px -20px rgba(0,0,0,0.7);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--primary-theme);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            height: 1px;
+            flex-grow: 1;
+            background: var(--glass-border);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 20px;
+            transition: var(--transition);
+        }
+
+        .feature-item:hover {
+            border-color: var(--primary-theme);
+            background: rgba(59, 130, 246, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .feature-item i {
+            font-size: 32px;
+            color: var(--primary-theme);
+            margin-bottom: 20px;
+        }
+
+        .feature-item h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            color: var(--text-gray);
+            font-size: 15px;
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .glass-card { padding: 30px; }
+            .section-inner { margin-top: -50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Home
+    </a>
+
+    <header class="project-hero">
+        <img src="cnc.jpeg" alt="CNC Laser" class="hero-image">
+        <div class="hero-content">
+            <h1 class="reveal">CNC Laser</h1>
+            <p class="text-xl text-blue-400 font-semibold tracking-widest uppercase reveal" style="transition-delay: 0.2s;">
+                CNC 3018 machine project
+            </p>
+        </div>
+    </header>
+
+    <main class="section-inner">
+        <!-- Overview -->
+        <div class="glass-card reveal">
+            <h2 class="section-title">Project Overview</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-lg text-slate-300 leading-relaxed">
+                        The CNC 3018 is a highly versatile and precise machine designed for intricate engraving and milling tasks. This project involved the assembly, configuration, and optimization of the CNC 3018 platform to achieve professional-grade results.
+                    </p>
+                    <p class="text-lg text-slate-300 leading-relaxed">
+                        By integrating a high-power laser module, the machine was expanded to handle both mechanical milling and precision laser cutting, bridging the gap between subtractive manufacturing and light-based fabrication.
+                    </p>
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                    <img src="cnc.jpeg" alt="Detail View" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Specs -->
+        <div class="glass-card reveal">
+            <h2 class="section-title">Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <i class="fas fa-microchip"></i>
+                    <h3>GRBL Control</h3>
+                    <p>Powered by open-source GRBL firmware for high-performance motion control and reliability.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>0.1mm Precision</h3>
+                    <p>Achieving high accuracy for PCB milling and detailed artistic engravings on various materials.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Dual Mode</h3>
+                    <p>Easily switch between a 775 spindle motor and a laser module for diverse creative projects.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-expand"></i>
+                    <h3>Work Area</h3>
+                    <p>300 x 180 x 45 mm effective work area, optimized for desktop fabrication and prototyping.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="text-center py-10 reveal">
+            <p class="text-slate-400 mb-6">Interested in more details about this project?</p>
+            <a href="mailto:mohamedelhefnawy0000@gmail.com" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-10 rounded-xl transition-all inline-flex items-center gap-3">
+                <i class="fas fa-paper-plane"></i> Inquire About This Project
+            </a>
+        </div>
+    </main>
+
+    <footer class="py-10 text-center opacity-50 text-sm">
+        <p>Mohamed Elhefnawy | CNC Laser Project Page</p>
+    </footer>
+
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+    </script>
+</body>
+</html>
