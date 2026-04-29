@@ -614,82 +614,10 @@
             text-shadow: 0 0 30px var(--primary-theme);
         }
 
-        /* --- Project Overlay --- */
-        .project-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-dark);
-            z-index: 2000;
-            display: none;
-            overflow-y: auto;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .project-overlay.active {
-            display: block;
-            opacity: 1;
-        }
-
-        .overlay-close {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            z-index: 2100;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .overlay-close:hover {
-            background: var(--primary-theme);
-            transform: rotate(90deg);
-        }
-
-        .project-hero-detail {
-            height: 60vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .project-hero-detail::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: linear-gradient(to top, var(--bg-dark), transparent);
-        }
-
-        .project-hero-detail img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.4);
-            z-index: -1;
-        }
-
         /* --- Sections Stylings --- */
         section {
             padding: 80px;
+            overflow: hidden;
         }
 
         /* Cleaned up h2 to use .section-title instead */
@@ -1078,6 +1006,10 @@
             .hero-content h1 {
                 font-size: clamp(36px, 7vw, 60px);
             }
+
+            .glass-card {
+                padding: 32px;
+            }
         }
 
         @media (max-width: 992px) {
@@ -1141,15 +1073,24 @@
 
             .box-container {
                 border-radius: 24px;
+                margin: 0;
+            }
+
+            section {
+                padding: 40px 20px;
+            }
+
+            .glass-card {
+                padding: 24px;
             }
 
             .hero-content h1 {
-                font-size: 28px;
+                font-size: clamp(28px, 8vw, 36px);
                 letter-spacing: -1px;
             }
 
             .hero-content p {
-                font-size: 14px;
+                font-size: 15px;
                 margin-bottom: 25px;
             }
 
@@ -1162,12 +1103,14 @@
             .hero-btns {
                 flex-direction: column;
                 width: 100%;
+                gap: 15px;
             }
 
             .btn-primary,
             .btn-secondary {
                 width: 100%;
                 justify-content: center;
+                padding: 16px;
             }
 
             .grid-cards,
@@ -1176,40 +1119,67 @@
                 grid-template-columns: 1fr;
             }
 
+            .edu-logos {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
             .logo-circle {
-                width: 60px;
-                height: 60px;
+                width: 70px;
+                height: 70px;
+            }
+
+            .logo-circle img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
             }
 
             .about-text {
-                font-size: 20px;
+                font-size: 18px !important;
+                line-height: 1.6;
             }
 
             h2 {
-                font-size: 36px;
+                font-size: 32px;
                 margin-bottom: 20px;
             }
 
-            h2::after {
-                width: 40px;
-                height: 3px;
-                bottom: -6px;
-            }
-
             .social-row {
-                gap: 15px;
+                gap: 20px;
                 justify-content: center;
                 flex-wrap: wrap;
             }
 
-            .hero-visual {
-                margin-bottom: 20px;
+            .skill-info {
+                font-size: 16px;
+                gap: 10px;
+                align-items: center;
             }
 
-            .reveal {
-                opacity: 1 !important;
-                transform: translateY(0) !important;
-                transition: none !important;
+            .skill-info span:first-child {
+                flex: 1;
+                min-width: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .skill-info i,
+            .skill-info img {
+                width: 32px;
+                height: 32px;
+                margin-right: 8px;
+            }
+
+            .work-box {
+                aspect-ratio: 4/3;
+                padding: 25px;
+            }
+
+            .work-box h3 {
+                font-size: 22px;
             }
         }
 
@@ -1436,7 +1406,7 @@
                     <h3>CNC Laser</h3>
                     <p>CNC 3018 machine project</p>
                 </a>
-                <a href="javascript:void(0)" onclick="openProject('smart-desert')" class="work-box reveal reveal-right"
+                <a href="smart-desert-city.html" class="work-box reveal reveal-right"
                     style="background-image: url('city.jpeg')">
                     <i class="fas fa-city"></i>
                     <h3>Smart Desert City</h3>
@@ -1474,133 +1444,44 @@
                 <p>Mohamed Elhefnawy | All Rights Reserved</p>
             </footer>
         </div>
-        <!-- Project Details Overlay -->
-        <div id="project-overlay" class="project-overlay">
-            <div class="overlay-close" onclick="closeProject()"><i class="fas fa-times"></i></div>
-
-            <div id="project-content">
-                <!-- Content will be injected or toggled here -->
-                <div id="smart-desert-content" class="hidden">
-                    <header class="project-hero-detail">
-                        <img src="city.jpeg" alt="Smart Desert City">
-                        <div class="hero-content">
-                            <h1 class="reveal active" style="font-family: 'Orbitron'; font-size: 5vw;">Smart Desert City
-                            </h1>
-                            <p class="text-xl text-blue-400 font-semibold uppercase">Urban Innovation for New Mansoura
-                            </p>
-                        </div>
-                    </header>
-                    <div class="section-inner" style="margin-top: -100px;">
-                        <div class="glass-card mb-10">
-                            <h2 class="section-title">Vision & Concept</h2>
-                            <div class="grid md:grid-cols-2 gap-12 items-center">
-                                <p class="text-lg text-slate-300">
-                                    The Smart Desert City is a visionary urban planning project aimed at transforming
-                                    arid landscapes into sustainable, technology-driven communities.
-                                </p>
-                                <img src="city.jpeg" class="rounded-2xl border border-white/10" alt="Vision">
-                            </div>
-                        </div>
-
-                        <div class="glass-card">
-                            <h2 class="section-title">Smart Infrastructure</h2>
-                            <div class="space-y-16">
-                                <!-- Civil -->
-                                <div class="grid md:grid-cols-2 gap-10 items-center">
-                                    <div>
-                                        <h3 class="text-2xl font-bold mb-4">Civil Engineering</h3>
-                                        <p class="text-slate-400">Designing resilient structural and infrastructure
-                                            systems for harsh desert environments by addressing extreme heat, strong
-                                            winds, and sand movement.</p>
-                                    </div>
-                                    <img src="CivilEngineering.png" class="rounded-2xl border border-white/10"
-                                        alt="Civil">
-                                </div>
-                                <!-- Mechanical -->
-                                <div class="grid md:grid-cols-2 gap-10 items-center">
-                                    <img src="MechanicalEngineering.png" class="rounded-2xl border border-white/10"
-                                        alt="Mechanical">
-                                    <div>
-                                        <h3 class="text-2xl font-bold mb-4">Mechanical Engineering</h3>
-                                        <p class="text-slate-400">Developing efficient cooling, ventilation, and
-                                            mechanical systems to maintain comfortable indoor conditions.</p>
-                                    </div>
-                                </div>
-                                <!-- Mechatronics -->
-                                <div class="grid md:grid-cols-2 gap-10 items-center">
-                                    <div>
-                                        <h3 class="text-2xl font-bold mb-4">Mechatronics Engineering</h3>
-                                        <p class="text-slate-400">Integrating smart sensors, automation, and centralized
-                                            control to enable real-time monitoring.</p>
-                                    </div>
-                                    <img src="MechatronicsEngineering.png" class="rounded-2xl border border-white/10"
-                                        alt="Mechatronics">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <script>
             function reveal() {
-                var reveals = document.querySelectorAll(".reveal");
-                for (var i = 0; i < reveals.length; i++) {
-                    var windowHeight = window.innerHeight;
-                    var elementTop = reveals[i].getBoundingClientRect().top;
-                    var elementVisible = 100;
-                    if (elementTop < windowHeight - elementVisible) {
-                        reveals[i].classList.add("active");
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
 
-                        // Animate skill bars specifically when their container is revealed
-                        const bars = reveals[i].querySelectorAll(".bar-fill");
-                        bars.forEach(bar => {
-                            bar.style.width = bar.getAttribute("data-percent");
-                        });
-                    }
+                    // Animate skill bars specifically when their container is revealed
+                    const bars = reveals[i].querySelectorAll(".bar-fill");
+                    bars.forEach(bar => {
+                        bar.style.width = bar.getAttribute("data-percent");
+                    });
                 }
             }
+        }
 
-            function updateScroll() {
-                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = (winScroll / height) * 100;
-                const scrollBar = document.getElementById("scroll-bar");
-                if (scrollBar) scrollBar.style.width = scrolled + "%";
-            }
+        function updateScroll() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            const scrollBar = document.getElementById("scroll-bar");
+            if (scrollBar) scrollBar.style.width = scrolled + "%";
+        }
 
-            window.addEventListener("scroll", () => {
-                reveal();
-                updateScroll();
-            });
-            window.addEventListener("load", () => {
-                reveal();
-                updateScroll();
-            });
+        window.addEventListener("scroll", () => {
+            reveal();
+            updateScroll();
+        });
+        window.addEventListener("load", () => {
+            reveal();
+            updateScroll();
+        });
 
-            function openProject(id) {
-                const overlay = document.getElementById('project-overlay');
-                const content = document.getElementById(id + '-content');
-                if (content) {
-                    content.classList.remove('hidden');
-                    overlay.style.display = 'block';
-                    setTimeout(() => overlay.classList.add('active'), 10);
-                    document.body.style.overflow = 'hidden';
-                }
-            }
-
-            function closeProject() {
-                const overlay = document.getElementById('project-overlay');
-                overlay.classList.remove('active');
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                    document.querySelectorAll('#project-content > div').forEach(div => div.classList.add('hidden'));
-                    document.body.style.overflow = 'auto';
-                }, 500);
-            }
-
-            // Proximity Highlight Effect (rest of JS remains...)
+        // Proximity Highlight Effect (rest of JS remains...)
 
             // Clickable Light Text
             const lightText = document.getElementById('light-text');
