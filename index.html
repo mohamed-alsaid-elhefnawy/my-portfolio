@@ -782,7 +782,7 @@
             font-weight: 800;
             text-transform: uppercase;
             color: var(--text-gray);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             letter-spacing: 2px;
             display: flex;
             align-items: center;
@@ -800,8 +800,8 @@
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
-            padding: 24px;
-            margin-bottom: 16px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
             transition: var(--transition);
         }
 
@@ -1074,13 +1074,17 @@
             }
 
             h2 {
-                font-size: 48px;
-                margin-bottom: 30px;
+                font-size: 36px;
+                margin-bottom: 24px;
+            }
+
+            .header-wrapper {
+                margin-bottom: 40px;
             }
 
             h2::after {
-                width: 60px;
-                height: 4px;
+                width: 50px;
+                height: 3px;
             }
         }
 
@@ -1170,25 +1174,20 @@
                 flex-wrap: wrap;
             }
 
-            .skill-info {
+            .skill-card-info {
                 font-size: 16px;
                 gap: 10px;
                 align-items: center;
             }
 
-            .skill-info span:first-child {
-                flex: 1;
-                min-width: 0;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
+            .skill-card-icon {
+                width: 40px;
+                height: 40px;
+                padding: 4px;
             }
 
-            .skill-info i,
-            .skill-info img {
-                width: 32px;
-                height: 32px;
-                margin-right: 8px;
+            .skill-card-name {
+                font-size: 16px;
             }
 
             .work-box {
@@ -1202,6 +1201,17 @@
 
             .work-box p {
                 font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-glass a {
+                font-size: 14px !important;
+            }
+
+            .navbar-glass {
+                padding-left: 12px !important;
+                padding-right: 8px !important;
             }
         }
 
@@ -1372,16 +1382,16 @@
                 <h2 class="section-title reveal reveal-zoom">Skills <span class="header-underline"></span>
                 </h2>
             </div>
-            <div class="skills-container" style="grid-template-columns: 1fr; max-width: 1100px; margin: 0 auto;">
+            <div class="skills-container max-w-[1400px] mx-auto">
                 <!-- Unified Engineering Software Box -->
-                <div class="skill-group reveal" style="padding: 60px;">
+                <div class="skill-group reveal px-6 py-10 md:px-16 md:py-12">
                     <h3 class="skill-group-title">Engineering Software</h3>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="grid grid-cols-1 gap-8">
                         <!-- Autodesk Sub-group -->
                         <div>
                             <p
-                                style="font-size: 14px; color: var(--primary-theme); text-transform: uppercase; letter-spacing: 1px; font-weight: 900; margin-bottom: 25px; opacity: 0.9;">
+                                style="font-size: 14px; color: var(--primary-theme); text-transform: uppercase; letter-spacing: 1px; font-weight: 900; margin-bottom: 15px; opacity: 0.9;">
                                 Autodesk</p>
                             <!-- AutoCAD -->
                             <div class="skill-card">
@@ -1419,7 +1429,7 @@
                         <!-- Mechanical Design Sub-group -->
                         <div>
                             <p
-                                style="font-size: 14px; color: var(--primary-theme); text-transform: uppercase; letter-spacing: 1px; font-weight: 900; margin-bottom: 25px; opacity: 0.8;">
+                                style="font-size: 14px; color: var(--primary-theme); text-transform: uppercase; letter-spacing: 1px; font-weight: 900; margin-bottom: 15px; opacity: 0.8;">
                                 Mechanical Design</p>
                             <!-- SolidWorks -->
                             <div class="skill-card">
