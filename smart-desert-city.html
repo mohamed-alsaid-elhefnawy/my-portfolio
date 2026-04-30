@@ -249,6 +249,127 @@
             transform: translateY(0);
         }
 
+        .reveal-zoom {
+            transform: scale(0.9) translateY(20px);
+        }
+
+        .reveal-zoom.active {
+            transform: scale(1) translateY(0);
+        }
+
+        .reveal-left {
+            transform: translateX(-50px);
+        }
+
+        .reveal-left.active {
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            transform: translateX(50px);
+        }
+
+        .reveal-right.active {
+            transform: translateX(0);
+        }
+
+        /* Framework Cards */
+        .framework-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            min-height: 400px;
+        }
+
+        @media (min-width: 1024px) {
+            .framework-card {
+                flex-direction: row;
+                align-items: stretch;
+            }
+
+            .framework-card:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+
+            .framework-img-container {
+                width: 50%;
+                height: auto !important;
+                min-height: 400px;
+            }
+
+            .framework-body {
+                width: 50%;
+                padding: 60px !important;
+                justify-content: center;
+            }
+        }
+
+        .framework-card:hover {
+            border-color: var(--primary-theme);
+            transform: translateY(-5px) scale(1.01);
+            background: rgba(59, 130, 246, 0.05);
+            box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.6);
+        }
+
+        .framework-img-container {
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .framework-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .framework-card:hover .framework-img-container img {
+            transform: scale(1.1);
+        }
+
+        .framework-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--primary-theme);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(0, 112, 255, 0.4);
+            z-index: 10;
+        }
+
+        .framework-body {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .framework-body h3 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .framework-body p {
+            color: var(--text-gray);
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
         @media (max-width: 768px) {
             .glass-card { padding: 30px 20px; }
             .section-inner { margin-top: -50px; }
@@ -258,6 +379,7 @@
             .order-1, .order-2 { order: 0 !important; }
             .back-btn { top: 20px; left: 20px; padding: 10px 18px; font-size: 14px; }
         }
+
     </style>
 </head>
 
@@ -273,7 +395,7 @@
     </a>
 
     <header class="project-hero">
-        <img src="city.jpeg" alt="Smart Desert City" class="hero-image">
+        <img src="city.png" alt="Smart Desert City" class="hero-image">
         <div class="hero-content">
             <h1 class="reveal">Smart Desert City</h1>
             <p class="text-xl text-blue-400 font-semibold tracking-widest uppercase reveal"
@@ -301,99 +423,93 @@
                     </p>
                 </div>
                 <div class="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                    <img src="city.jpeg" alt="City Visualization" class="w-full h-full object-cover">
+                    <img src="city.png" alt="City Visualization" class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
 
-        <!-- Infrastructure Features -->
+        <!-- Engineering Frameworks -->
         <div class="glass-card reveal">
-            <h2 class="section-title">Smart Infrastructure</h2>
+            <h2 class="section-title reveal reveal-zoom">The Engineering Framework</h2>
+            <p class="text-slate-400 mb-12 max-w-2xl reveal">
+                The Smart Desert City is built upon a multi-disciplinary framework, integrating various engineering specializations to create a cohesive and sustainable urban environment.
+            </p>
 
-            <div class="space-y-16">
+            <div class="grid grid-cols-1 gap-12">
                 <!-- Civil Engineering -->
-                <div class="grid md:grid-cols-2 gap-10 items-center reveal">
-                    <div class="order-2 md:order-1">
-                        <h3 class="text-2xl font-bold text-white mb-4">Civil Engineering</h3>
-                        <p class="text-slate-400 leading-relaxed">
-                            Designing resilient structural and infrastructure systems for harsh desert environments by
-                            addressing extreme heat, strong winds, and sand movement.
-                            <br><br>
-                            This involves using durable materials, climate-adapted construction methods, and sustainable
-                            infrastructure for water, energy, and transportation to ensure long-term efficiency and
-                            sustainability.
-                        </p>
+                <div class="framework-card reveal reveal-left" style="transition-delay: 0.1s;">
+                    <div class="framework-img-container">
+                        <img src="CivilEngineering.png" alt="Civil Engineering">
+                        <div class="framework-tag">Infrastructure</div>
                     </div>
-                    <div class="order-1 md:order-2 rounded-2xl overflow-hidden border border-white/10 aspect-video">
-                        <img src="CivilEngineering.png" alt="Civil Engineering" class="w-full h-full object-cover">
+                    <div class="framework-body">
+                        <h3>Civil Engineering</h3>
+                        <p>Designing resilient structural systems for harsh desert environments, addressing extreme heat and sand movement through climate-adapted construction.</p>
+                    </div>
+                </div>
+
+                <!-- Electrical Engineering -->
+                <div class="framework-card reveal reveal-right" style="transition-delay: 0.2s;">
+                    <div class="framework-img-container">
+                        <img src="ElectricalEngineering.png" alt="Electrical Engineering">
+                        <div class="framework-tag">Smart Grid</div>
+                    </div>
+                    <div class="framework-body">
+                        <h3>Electrical Engineering</h3>
+                        <p>Designing and optimizing sustainable solar and wind power generation systems, integrated microgrids, and energy storage solutions to ensure reliable power distribution throughout the desert environment, with advanced smart grid controls for efficiency and stability.</p>
                     </div>
                 </div>
 
                 <!-- Mechanical Engineering -->
-                <div class="grid md:grid-cols-2 gap-10 items-center reveal">
-                    <div class="rounded-2xl overflow-hidden border border-white/10 aspect-video">
-                        <img src="MechanicalEngineering.png" alt="Mechanical Engineering"
-                            class="w-full h-full object-cover">
+                <div class="framework-card reveal reveal-left" style="transition-delay: 0.3s;">
+                    <div class="framework-img-container">
+                        <img src="MechanicalEngineering.png" alt="Mechanical Engineering">
+                        <div class="framework-tag">HVAC & Energy</div>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-white mb-4">Mechanical Engineering</h3>
-                        <p class="text-slate-400 leading-relaxed">
-                            Developing efficient cooling, ventilation, and mechanical systems to maintain comfortable
-                            indoor conditions, enhance energy efficiency and improve equipment performance through
-                            innovative temperature control, airflow management, and sustainable design solutions.
-                        </p>
+                    <div class="framework-body">
+                        <h3>Mechanical Engineering</h3>
+                        <p>Developing efficient cooling and ventilation systems to maintain indoor comfort and enhance equipment performance through innovative thermal management.</p>
                     </div>
                 </div>
 
                 <!-- Mechatronics Engineering -->
-                <div class="grid md:grid-cols-2 gap-10 items-center reveal">
-                    <div class="order-2 md:order-1">
-                        <h3 class="text-2xl font-bold text-white mb-4">Mechatronics Engineering</h3>
-                        <p class="text-slate-400 leading-relaxed">
-                            Integrating smart sensors, automation, and centralized control to enable real-time
-                            monitoring and analysis, enhancing system performance, operational efficiency, safety, and
-                            sustainability within facilities.
-                        </p>
+                <div class="framework-card reveal reveal-right" style="transition-delay: 0.4s;">
+                    <div class="framework-img-container">
+                        <img src="MechatronicsEngineering.png" alt="Mechatronics Engineering">
+                        <div class="framework-tag">Automation</div>
                     </div>
-                    <div class="order-1 md:order-2 rounded-2xl overflow-hidden border border-white/10 aspect-video">
-                        <img src="MechatronicsEngineering.png" alt="Mechatronics Engineering"
-                            class="w-full h-full object-cover">
+                    <div class="framework-body">
+                        <h3>Mechatronics Engineering</h3>
+                        <p>Integrating smart sensors and centralized control for real-time monitoring, enhancing system performance and operational safety.</p>
                     </div>
                 </div>
 
                 <!-- Aerospace Engineering -->
-                <div class="grid md:grid-cols-2 gap-10 items-center reveal">
-                    <div class="rounded-2xl overflow-hidden border border-white/10 aspect-video">
-                        <img src="AerospaceEngineering.png" alt="Aerospace Engineering"
-                            class="w-full h-full object-cover">
+                <div class="framework-card reveal reveal-left" style="transition-delay: 0.5s;">
+                    <div class="framework-img-container">
+                        <img src="AerospaceEngineering.png" alt="Aerospace Engineering">
+                        <div class="framework-tag">Air Systems</div>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-white mb-4">Aerospace Engineering</h3>
-                        <p class="text-slate-400 leading-relaxed">
-                            Designing and implementing drone airports and integrated air systems with planned
-                            infrastructure, runways, and automated air traffic management to enable safe, efficient
-                            drone operations across diverse environments.
-                        </p>
+                    <div class="framework-body">
+                        <h3>Aerospace Engineering</h3>
+                        <p>Designing drone airports and automated air traffic management systems to enable safe and efficient aerial operations.</p>
                     </div>
                 </div>
 
-                <!-- Petroleum and Gas Engineering -->
-                <div class="grid md:grid-cols-2 gap-10 items-center reveal">
-                    <div class="order-2 md:order-1">
-                        <h3 class="text-2xl font-bold text-white mb-4">Petroleum & Gas Engineering</h3>
-                        <p class="text-slate-400 leading-relaxed">
-                            Designing energy extraction and conversion systems using natural gas to enhance production
-                            efficiency, ensure resource sustainability, and reduce emissions through advanced
-                            technologies for safe and efficient generation of electrical and thermal energy.
-                        </p>
+                <!-- Petroleum & Gas Engineering -->
+                <div class="framework-card reveal reveal-right" style="transition-delay: 0.6s;">
+                    <div class="framework-img-container">
+                        <img src="PetroleumGasEngineering.png" alt="Petroleum & Gas Engineering">
+                        <div class="framework-tag">Power Generation</div>
                     </div>
-                    <div class="order-1 md:order-2 rounded-2xl overflow-hidden border border-white/10 aspect-video">
-                        <img src="PetroleumGasEngineering.png" alt="Petroleum & Gas Engineering"
-                            class="w-full h-full object-cover">
+                    <div class="framework-body">
+                        <h3>Petroleum & Gas Engineering</h3>
+                        <p>Designing efficient energy conversion systems using natural gas to ensure resource sustainability and reduce emissions.</p>
                     </div>
                 </div>
             </div>
         </div>
+
 
         <!-- Call to Action -->
         <div class="text-center py-10 reveal">
@@ -406,7 +522,7 @@
     </main>
 
     <footer class="py-10 text-center opacity-50 text-sm">
-        <p>Mohamed Elhefnawy | Smart Desert City Concept Page</p>
+        <p>Mohamed Elhefnawy | Smart Desert City</p>
     </footer>
 
     <script>
